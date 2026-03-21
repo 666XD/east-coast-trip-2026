@@ -253,6 +253,36 @@ export default function Home() {
               </div>
             </div>
 
+            {/* 預估總花費 */}
+            <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 border border-emerald-200 rounded-lg p-6">
+              <h3 className="text-xl font-bold text-emerald-900 mb-4">💰 預估旅程花費（不含機票住宿購物）</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {itinerary.map((day, idx) => {
+                  const dayTotal = day.budget ? day.budget.reduce((sum, b) => sum + parseInt(b.cost.replace('$', '')), 0) : 0;
+                  const dayCity = getCityKey(day.city);
+                  return (
+                    <div key={idx} className="flex items-center justify-between bg-white rounded-lg px-4 py-3 shadow-sm">
+                      <div className="flex items-center gap-3">
+                        <span
+                          className="inline-block w-3 h-3 rounded-full"
+                          style={{ backgroundColor: getCityColor(dayCity) }}
+                        />
+                        <span className="text-sm font-medium text-gray-700">{day.date}</span>
+                      </div>
+                      <span className="font-bold text-emerald-800">${dayTotal}</span>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="mt-4 pt-4 border-t border-emerald-300 flex justify-between items-center">
+                <span className="text-lg font-bold text-emerald-900">7 天總計</span>
+                <span className="text-2xl font-bold text-emerald-800">
+                  ${itinerary.reduce((total, day) => total + (day.budget ? day.budget.reduce((sum, b) => sum + parseInt(b.cost.replace('$', '')), 0) : 0), 0)}
+                </span>
+              </div>
+              <p className="text-xs text-emerald-700 mt-2">* 以上為一人預估花費，實際花費依餐廳選擇與匯率浮動</p>
+            </div>
+
             {/* 重要提醒 */}
             <div className="bg-amber-50 border-l-4 border-amber-400 rounded-r-lg p-6">
               <h3 className="text-xl font-bold text-amber-900 mb-4">⚠️ 重要提醒</h3>
@@ -267,7 +297,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-start">
                   <span className="mr-3 font-bold">💵</span>
-                  <span>Mike's Pastry、Shanghai You Garden 等餐廳只收現金</span>
+                  <span>Mike's Pastry、Shanghai You Garden、Caffe Vittoria 等餐廳只收現金</span>
                 </li>
                 <li className="flex items-start">
                   <span className="mr-3 font-bold">🚇</span>
@@ -507,6 +537,26 @@ export default function Home() {
                         height={350}
                       />
                     </div>
+
+                    {/* Budget */}
+                    {day.budget && day.budget.length > 0 && (
+                      <div className="mb-6 bg-white rounded-lg border border-gray-200 overflow-hidden">
+                        <div className="px-4 py-3 bg-gray-100 border-b border-gray-200 flex items-center justify-between">
+                          <h4 className="font-bold text-gray-800">💰 當日預估花費</h4>
+                          <span className="font-bold text-lg" style={{ color: getCityColor(cityKey) }}>
+                            ${day.budget.reduce((sum, b) => sum + parseInt(b.cost.replace('$', '')), 0)}
+                          </span>
+                        </div>
+                        <div className="divide-y divide-gray-100">
+                          {day.budget.map((b, bIdx) => (
+                            <div key={bIdx} className="px-4 py-2 flex justify-between items-center text-sm">
+                              <span className="text-gray-700">{b.item}</span>
+                              <span className="font-semibold text-gray-900">{b.cost}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
 
                     {/* Timeline */}
                     <div className="space-y-4">

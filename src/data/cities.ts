@@ -41,11 +41,17 @@ export interface ScheduleItem {
   coord?: string;
 }
 
+export interface BudgetItem {
+  item: string;
+  cost: string;
+}
+
 export interface ItineraryDay {
   date: string;
   city: string;
   title: string;
   hotel: string;
+  budget: BudgetItem[];
   schedule: ScheduleItem[];
 }
 
@@ -154,6 +160,48 @@ export const cities: Record<string, CityData> = {
             time: "5min",
             coord: "Skinny House",
           },
+          {
+            name: "Boston Public Library",
+            desc: "全美第一座公共圖書館，內部如哈利波特場景",
+            time: "45min",
+            coord: "Boston Public Library",
+          },
+          {
+            name: "Isabella Stewart Gardner Museum",
+            desc: "預約制，透光絕美中庭花園，多元藝術收藏",
+            time: "2hr",
+            coord: "Isabella Stewart Gardner Museum",
+          },
+          {
+            name: "Boston Tea Party Museum",
+            desc: "親自體驗把茶葉丟進海裡的歷史場景",
+            time: "1hr",
+            coord: "Boston Tea Party Museum",
+          },
+          {
+            name: "ICA 當代藝術館",
+            desc: "海濱大面玻璃窗看海景，週四免費",
+            time: "1-2hr",
+            coord: "ICA Boston",
+          },
+          {
+            name: "Massachusetts State House",
+            desc: "著名金色圓頂，自由之路沿線",
+            time: "30min",
+            coord: "Massachusetts State House",
+          },
+          {
+            name: "Paul Revere House",
+            desc: "波士頓最古老住宅之一",
+            time: "30min",
+            coord: "Paul Revere House",
+          },
+          {
+            name: "Old North Church",
+            desc: "美國獨立戰爭傳遞英軍動向的重要地點",
+            time: "30min",
+            coord: "Old North Church",
+          },
         ],
       },
       eat: {
@@ -206,6 +254,45 @@ export const cities: Record<string, CityData> = {
             coord: "L.A. Burdick",
           },
           { name: "Clam Chowder", desc: "波士頓靈魂食物，到處都要喝一碗", must: true, price: "$" },
+          {
+            name: "Daily Catch",
+            desc: "North End 排隊名店！墨魚麵+龍蝦，排隊1.5hr",
+            must: true,
+            price: "$$$",
+            coord: "Daily Catch",
+          },
+          {
+            name: "James Hook & Co",
+            desc: "波士頓在地龍蝦卷",
+            price: "$$",
+            coord: "James Hook & Co",
+          },
+          {
+            name: "Tatte Bakery & Cafe",
+            desc: "波士頓超火早午餐！開心果拿鐵+班尼迪克蛋",
+            must: true,
+            price: "$$",
+            coord: "Tatte Bakery",
+          },
+          {
+            name: "Caffe Vittoria",
+            desc: "小義大利百年老店，必吃提拉米蘇 (Cash Only!)",
+            must: true,
+            price: "$",
+            coord: "Caffe Vittoria",
+          },
+          {
+            name: "Ogawa Coffee 小川咖啡",
+            desc: "日本海外唯一分店！焙茶拿鐵+抹茶",
+            price: "$",
+            coord: "Ogawa Coffee",
+          },
+          {
+            name: "Luke's Lobster",
+            desc: "龍蝦堡+龍蝦濃湯",
+            price: "$$",
+            coord: "Luke's Lobster",
+          },
         ],
       },
       buy: {
@@ -310,6 +397,14 @@ export const cities: Record<string, CityData> = {
           { name: "Little Island", desc: "Hudson River 鬱金香型人造公園島", time: "1hr", coord: "Little Island" },
           { name: "SoHo", desc: "鑄鐵建築 + 精品 + 藝廊", time: "1-2hr", coord: "SoHo" },
           { name: "Flatiron Building", desc: "三角形地標建築", time: "15min", coord: "Flatiron Building" },
+          { name: "Washington Square Park", desc: "格林威治村地標拱門", time: "30min", coord: "Washington Square Park" },
+          { name: "The Vessel 大松果", desc: "蜂巢造型互動建築", must: true, time: "30min", coord: "The Vessel" },
+          { name: "Pier 17", desc: "複合式商場，看布魯克林大橋絕佳視角", time: "1hr", coord: "Pier 17" },
+          { name: "MoMA 現代藝術博物館", desc: "梵谷星夜、莫內睡蓮 $30", time: "2-3hr", coord: "MoMA" },
+          { name: "Staten Island Ferry", desc: "免費渡輪！船上遠眺自由女神+日落", time: "1hr", coord: "Staten Island Ferry" },
+          { name: "The Oculus", desc: "世貿中心展翅建築，超大轉運站+商場", time: "30min", coord: "The Oculus" },
+          { name: "The Edge 觀景台", desc: "Hudson Yards 戶外觀景台，可走鋼索", time: "1hr", coord: "The Edge" },
+          { name: "Apple Store 旗艦店", desc: "第五大道玻璃方塊地標", time: "30min", coord: "Apple Store Fifth Ave" },
         ],
       },
       eat: {
@@ -375,6 +470,20 @@ export const cities: Record<string, CityData> = {
             must: true,
             price: "$$",
             coord: "Mama's Too",
+          },
+          {
+            name: "Prince Street Pizza",
+            desc: "Vodka Pizza 紐約排隊名店！厚餅皮+爆量起司",
+            must: true,
+            price: "$",
+            coord: "Prince Street Pizza",
+          },
+          {
+            name: "Junior's Bakery",
+            desc: "紐約代表性起司蛋糕，超濃郁",
+            must: true,
+            price: "$",
+            coord: "Junior's Bakery",
           },
         ],
       },
@@ -631,6 +740,9 @@ export const cities: Record<string, CityData> = {
             time: "2-3hr",
             coord: "National Gallery",
           },
+          { name: "WWII Memorial", desc: "二戰紀念碑，4048顆星星的自由牆", time: "30min", coord: "WWII Memorial" },
+          { name: "FBI Headquarters", desc: "FBI 總部外觀", time: "15min", coord: "FBI Headquarters" },
+          { name: "Apple Carnegie Library", desc: "圖書館改建的蘋果商店，建築超美", time: "30min", coord: "Apple Carnegie Library" },
         ],
       },
       eat: {
@@ -711,6 +823,13 @@ export const itinerary: ItineraryDay[] = [
     city: "boston",
     title: "抵達波士頓 → Freedom Trail + North End",
     hotel: "波士頓住宿",
+    budget: [
+      { item: "地鐵 (T) Day Pass", cost: "$11" },
+      { item: "午餐 Quincy Market Chowder", cost: "$15" },
+      { item: "Daily Catch 墨魚麵+龍蝦", cost: "$35" },
+      { item: "Mike's Pastry cannoli", cost: "$6" },
+      { item: "L.A. Burdick 熱巧克力", cost: "$8" },
+    ],
     schedule: [
       { time: "11:41", act: "✈️ 飛機降落 Logan Airport", icon: "✈️", coord: "Logan Airport" },
       { time: "12:30", act: "搭地鐵到住處 check in 放行李", icon: "🚇" },
@@ -723,9 +842,9 @@ export const itinerary: ItineraryDay[] = [
       },
       {
         time: "17:00-18:30",
-        act: "Neptune Oyster lobster roll 🦞 或 Mamma Maria",
+        act: "Daily Catch 墨魚麵+龍蝦 🦞 (排隊1.5hr必吃！) 或 Neptune Oyster",
         icon: "🦞",
-        coord: "Neptune Oyster",
+        coord: "Daily Catch",
       },
       { time: "18:30-19:00", act: "Mike's Pastry cannoli (Cash Only!)", icon: "🍰", coord: "Mike's Pastry" },
       {
@@ -743,6 +862,13 @@ export const itinerary: ItineraryDay[] = [
     city: "boston",
     title: "Harvard & MIT → 火車到紐約",
     hotel: "Arlo NoMad (NYC)",
+    budget: [
+      { item: "Amtrak 波士頓→紐約", cost: "$40" },
+      { item: "Empire State Building 門票", cost: "$42" },
+      { item: "Los Tacos 午餐", cost: "$12" },
+      { item: "晚餐", cost: "$50" },
+      { item: "NYC 地鐵", cost: "$6" },
+    ],
     schedule: [
       { time: "06:45", act: "搭紅線到 Harvard 站 (~25min)", icon: "🚇" },
       {
@@ -779,7 +905,7 @@ export const itinerary: ItineraryDay[] = [
         icon: "🌮",
         coord: "Chelsea Market",
       },
-      { time: "18:00-19:00", act: "High Line 日落 → Little Island", icon: "🌅", coord: "High Line" },
+      { time: "18:00-19:00", act: "High Line 日落 → Little Island → The Vessel 大松果", icon: "🌅", coord: "High Line" },
       {
         time: "19:30-21:00",
         act: "Atomix 韓式 fine dining (需訂位)",
@@ -794,6 +920,14 @@ export const itinerary: ItineraryDay[] = [
     city: "nyc",
     title: "自由女神 → Brooklyn Bridge → Broadway",
     hotel: "M Social Times Square",
+    budget: [
+      { item: "早餐 Russ & Daughters", cost: "$18" },
+      { item: "自由女神渡輪", cost: "$25" },
+      { item: "Top of the Rock 門票", cost: "$40" },
+      { item: "Broadway 門票", cost: "$100" },
+      { item: "午餐+零食", cost: "$30" },
+      { item: "NYC 地鐵", cost: "$6" },
+    ],
     schedule: [
       {
         time: "07:00-08:00",
@@ -809,7 +943,7 @@ export const itinerary: ItineraryDay[] = [
         coord: "Statue of Liberty",
       },
       { time: "12:30", act: "Wall Street + Charging Bull 拍照", icon: "🐂", coord: "Wall Street" },
-      { time: "13:00", act: "The Oculus 建築朝聖", icon: "🕊️", coord: "The Oculus" },
+      { time: "13:00", act: "The Oculus 展翅建築朝聖", icon: "🕊️", coord: "The Oculus" },
       {
         time: "13:30-14:30",
         act: "走 Brooklyn Bridge → DUMBO 拍照",
@@ -818,9 +952,9 @@ export const itinerary: ItineraryDay[] = [
       },
       {
         time: "14:30-15:15",
-        act: "DUMBO 午餐 + Manhattan Bridge 網美照",
+        act: "DUMBO 午餐 + Pier 17 看橋景",
         icon: "🍕",
-        coord: "DUMBO",
+        coord: "Pier 17",
       },
       {
         time: "15:30-17:00",
@@ -843,6 +977,13 @@ export const itinerary: ItineraryDay[] = [
     city: "flushing",
     title: "The Met → 法拉盛掃街 → 唐人街",
     hotel: "Flushing 住宿",
+    budget: [
+      { item: "Levain Bakery", cost: "$6" },
+      { item: "The Met 門票 (建議)", cost: "$30" },
+      { item: "法拉盛掃街美食", cost: "$30" },
+      { item: "唐人街晚餐+甜點", cost: "$25" },
+      { item: "NYC 地鐵", cost: "$6" },
+    ],
     schedule: [
       {
         time: "08:00-08:30",
@@ -909,6 +1050,12 @@ export const itinerary: ItineraryDay[] = [
     city: "dc",
     title: "火車到 DC → 🌸 櫻花 + 紀念碑巡禮",
     hotel: "AC Hotel DC",
+    budget: [
+      { item: "Amtrak 紐約→DC", cost: "$50" },
+      { item: "Ben's Chili Bowl 午餐", cost: "$12" },
+      { item: "晚餐 Zaytinya", cost: "$50" },
+      { item: "DC Metro", cost: "$6" },
+    ],
     schedule: [
       {
         time: "06:30",
@@ -937,6 +1084,7 @@ export const itinerary: ItineraryDay[] = [
         coord: "Jefferson Memorial",
       },
       { time: "14:30", act: "MLK Memorial", icon: "🏛️", coord: "MLK Memorial" },
+      { time: "14:45", act: "WWII Memorial 二戰紀念碑", icon: "🏛️", coord: "WWII Memorial" },
       {
         time: "15:00",
         act: "Lincoln Memorial 林肯紀念堂",
@@ -970,6 +1118,13 @@ export const itinerary: ItineraryDay[] = [
     city: "dc",
     title: "Smithsonian 博物館 + Georgetown + 大餐",
     hotel: "AC Hotel DC",
+    budget: [
+      { item: "Old Ebbitt Grill 午餐", cost: "$40" },
+      { item: "Baked & Wired 咖啡", cost: "$8" },
+      { item: "Georgetown 購物 (預估)", cost: "$50" },
+      { item: "Albi 大餐", cost: "$80" },
+      { item: "DC Metro", cost: "$6" },
+    ],
     schedule: [
       {
         time: "09:00-11:30",
@@ -991,9 +1146,9 @@ export const itinerary: ItineraryDay[] = [
       },
       {
         time: "14:30",
-        act: "Capitol + Library of Congress",
+        act: "U.S. Capitol 國會大廈 (1hr導覽) + Library of Congress 國會圖書館",
         icon: "📚",
-        coord: "Library of Congress",
+        coord: "U.S. Capitol",
       },
       {
         time: "16:00-17:30",
@@ -1027,6 +1182,10 @@ export const itinerary: ItineraryDay[] = [
     city: "dc",
     title: "DC → 火車回喬治亞州",
     hotel: "—",
+    budget: [
+      { item: "Eastern Market 早餐", cost: "$15" },
+      { item: "Amtrak DC→回程", cost: "$50" },
+    ],
     schedule: [
       { time: "08:00", act: "如有時間：Spy Museum 或 NMAAHC", icon: "🏛️", coord: "Spy Museum" },
       { time: "09:00", act: "Eastern Market 農夫市集", icon: "🛒", coord: "Eastern Market" },
