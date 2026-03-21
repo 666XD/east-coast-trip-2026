@@ -117,6 +117,18 @@ const getMarkersForDay = (dayIndex: number): MarkerData[] => {
     }
   });
 
+  // Add hotel marker
+  if (day.hotelCoord && coords[day.hotelCoord]) {
+    const [lat, lng] = coords[day.hotelCoord];
+    markers.push({
+      lat,
+      lng,
+      name: `🏨 ${day.hotel}`,
+      cat: '住宿',
+      color: '#8b5cf6',
+    });
+  }
+
   return markers;
 };
 
@@ -149,20 +161,17 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="sticky top-0 z-50 bg-gradient-to-r from-slate-900 via-blue-900 to-slate-800 text-white pt-6 pb-8">
+      <div className="sticky top-0 z-50 bg-gradient-to-r from-slate-900 via-blue-900 to-slate-800 text-white py-2">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-4">
-            <p className="text-sm font-light tracking-widest mb-2">2026 Spring</p>
-            <h1 className="text-5xl font-bold mb-2">美東之旅完全攻略</h1>
-            <p className="text-lg text-gray-300 mb-2">East Coast Ultimate Guide</p>
-            <p className="text-base text-gray-400 font-light">波士頓 Boston → 紐約 NYC → 法拉盛 Flushing → 華盛頓 DC</p>
-            <p className="text-sm text-gray-500 mt-2">3/30 - 4/5, 2026</p>
+          <div className="text-center flex flex-col items-center gap-0.5">
+            <h1 className="text-lg font-bold">美東之旅完全攻略 <span className="font-normal text-gray-300 text-sm">East Coast Ultimate Guide</span></h1>
+            <p className="text-xs text-gray-400">波士頓 → 紐約 → 法拉盛 → 華盛頓 DC &nbsp;|&nbsp; 3/30 - 4/5, 2026</p>
           </div>
         </div>
       </div>
 
       {/* Sticky Tabs */}
-      <div className="sticky top-24 z-40 bg-white border-b border-gray-200 shadow-sm">
+      <div className="sticky top-10 z-40 bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex justify-center gap-8 py-4">
             <button
@@ -560,19 +569,29 @@ export default function Home() {
 
                     {/* Timeline */}
                     <div className="space-y-4">
-                      {day.schedule.map((item, itemIdx) => (
-                        <div key={itemIdx} className="flex gap-4">
+                      {(() => {
+                        let markerNum = 0;
+                        return day.schedule.map((item, itemIdx) => {
+                          const num = item.coord ? ++markerNum : null;
+                          return (
+                        <div key={itemIdx} className="flex gap-3">
                           <div className="flex flex-col items-center">
-                            <div
-                              className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-lg"
-                              style={{ backgroundColor: getCityColor(cityKey) }}
-                            >
-                              {item.icon}
-                            </div>
+                            {num ? (
+                              <div
+                                className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0"
+                                style={{ backgroundColor: getCityColor(cityKey) }}
+                              >
+                                {num}
+                              </div>
+                            ) : (
+                              <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-300 text-white text-lg shrink-0">
+                                {item.icon}
+                              </div>
+                            )}
                             {itemIdx < day.schedule.length - 1 && (
                               <div
-                                className="w-1 h-12 mt-2"
-                                style={{ backgroundColor: getCityColor(cityKey) }}
+                                className="w-0.5 flex-1 min-h-8 mt-1"
+                                style={{ backgroundColor: num ? getCityColor(cityKey) : '#d1d5db' }}
                               ></div>
                             )}
                           </div>
@@ -589,7 +608,9 @@ export default function Home() {
                             )}
                           </div>
                         </div>
-                      ))}
+                          );
+                        });
+                      })()}
                     </div>
                   </div>
                 </div>
