@@ -6,7 +6,8 @@
       "Bash(npx vercel:*)",
       "mcp__claude_ai_Notion__notion-search",
       "mcp__claude_ai_Notion__notion-fetch",
-      "Bash(npx next:*)"
+      "Bash(npx next:*)",
+      "mcp__claude_ai_Notion__notion-update-page"
     ]
   }
 }

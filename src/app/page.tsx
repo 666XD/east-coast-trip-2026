@@ -137,6 +137,27 @@ export default function Home() {
   const [selectedCity, setSelectedCity] = useState<'boston' | 'nyc' | 'flushing' | 'dc'>('boston');
   const [selectedCategory, setSelectedCategory] = useState('全部');
 
+  // Build schedule info mapping: coord/name → "date time"
+  const getScheduleInfo = (coord?: string, name?: string): string | null => {
+    if (!coord && !name) return null;
+    // Direct coord match
+    for (const day of itinerary) {
+      for (const item of day.schedule) {
+        if (item.coord === coord) return `${day.date} ${item.time}`;
+      }
+    }
+    // Fallback: check if coord key or name appears in schedule act text
+    const terms = [coord, name].filter(Boolean) as string[];
+    for (const day of itinerary) {
+      for (const item of day.schedule) {
+        for (const term of terms) {
+          if (item.act.includes(term)) return `${day.date} ${item.time}`;
+        }
+      }
+    }
+    return null;
+  };
+
   const getCityDisplayName = (key: 'boston' | 'nyc' | 'flushing' | 'dc'): string => {
     const nameMap = {
       boston: '波士頓 Boston',
@@ -428,13 +449,18 @@ export default function Home() {
                 <div>
                   <h3 className="text-2xl font-bold mb-4 text-gray-900">🏛️ 看的 / 景點</h3>
                   <div className="space-y-3">
-                    {cities[selectedCity].sections.see.items.map((item, idx) => (
-                      <div key={idx} className="bg-gray-50 rounded-lg p-4 hover:shadow-md transition-shadow">
+                    {cities[selectedCity].sections.see.items.map((item, idx) => {
+                      const info = getScheduleInfo(item.coord, item.name);
+                      return (
+                      <div key={idx} className={`rounded-lg p-4 hover:shadow-md transition-shadow ${info ? 'bg-green-50 border border-green-200' : 'bg-gray-50'}`}>
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2">
+                            <div className="flex items-center gap-2 mb-2 flex-wrap">
                               <h4 className="font-bold text-gray-900">{item.name}</h4>
                               {item.must && <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">必去</span>}
+                              {info
+                                ? <span className="bg-green-500 text-white text-xs px-2 py-1 rounded">✅ {info}</span>
+                                : <span className="bg-gray-400 text-white text-xs px-2 py-1 rounded">未排入</span>}
                             </div>
                             <p className="text-gray-600 text-sm mb-2">{item.desc}</p>
                             <div className="flex gap-4 text-sm text-gray-500">
@@ -451,7 +477,8 @@ export default function Home() {
                           )}
                         </div>
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               ) : null}
@@ -460,13 +487,18 @@ export default function Home() {
                 <div>
                   <h3 className="text-2xl font-bold mb-4 text-gray-900 mt-8">🍽️ 吃的 / 美食</h3>
                   <div className="space-y-3">
-                    {cities[selectedCity].sections.eat.items.map((item, idx) => (
-                      <div key={idx} className="bg-gray-50 rounded-lg p-4 hover:shadow-md transition-shadow">
+                    {cities[selectedCity].sections.eat.items.map((item, idx) => {
+                      const info = getScheduleInfo(item.coord, item.name);
+                      return (
+                      <div key={idx} className={`rounded-lg p-4 hover:shadow-md transition-shadow ${info ? 'bg-green-50 border border-green-200' : 'bg-gray-50'}`}>
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2">
+                            <div className="flex items-center gap-2 mb-2 flex-wrap">
                               <h4 className="font-bold text-gray-900">{item.name}</h4>
                               {item.must && <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">必吃</span>}
+                              {info
+                                ? <span className="bg-green-500 text-white text-xs px-2 py-1 rounded">✅ {info}</span>
+                                : <span className="bg-gray-400 text-white text-xs px-2 py-1 rounded">未排入</span>}
                             </div>
                             <p className="text-gray-600 text-sm mb-2">{item.desc}</p>
                             <div className="flex gap-4 text-sm text-gray-500">
@@ -483,7 +515,8 @@ export default function Home() {
                           )}
                         </div>
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               ) : null}
@@ -492,11 +525,18 @@ export default function Home() {
                 <div>
                   <h3 className="text-2xl font-bold mb-4 text-gray-900 mt-8">🛍️ 買的 / 購物</h3>
                   <div className="space-y-3">
-                    {cities[selectedCity].sections.buy.items.map((item, idx) => (
-                      <div key={idx} className="bg-gray-50 rounded-lg p-4 hover:shadow-md transition-shadow">
+                    {cities[selectedCity].sections.buy.items.map((item, idx) => {
+                      const info = getScheduleInfo(item.coord, item.name);
+                      return (
+                      <div key={idx} className={`rounded-lg p-4 hover:shadow-md transition-shadow ${info ? 'bg-green-50 border border-green-200' : 'bg-gray-50'}`}>
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
-                            <h4 className="font-bold text-gray-900 mb-2">{item.name}</h4>
+                            <div className="flex items-center gap-2 mb-2 flex-wrap">
+                              <h4 className="font-bold text-gray-900">{item.name}</h4>
+                              {info
+                                ? <span className="bg-green-500 text-white text-xs px-2 py-1 rounded">✅ {info}</span>
+                                : <span className="bg-gray-400 text-white text-xs px-2 py-1 rounded">未排入</span>}
+                            </div>
                             <p className="text-gray-600 text-sm">{item.desc}</p>
                           </div>
                           {item.coord && (
@@ -509,7 +549,8 @@ export default function Home() {
                           )}
                         </div>
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               ) : null}

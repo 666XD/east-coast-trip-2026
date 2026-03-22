@@ -93,6 +93,10 @@ export const coords: LocationCoords = {
   "Sheep Meadow": [40.7724, -73.9751],
   "Strawberry Fields": [40.7757, -73.9749],
   "The Edge": [40.7532, -74.0013],
+  "Best Bagel": [40.7527, -73.9926],
+  "The Halal Guys": [40.7619, -73.9793],
+  "Liberty Bagels": [40.7510, -73.9880],
+  "Gray's Papaya": [40.7793, -73.9810],
   // Flushing
   "Flushing Main St": [40.7596, -73.8302],
   "New World Mall": [40.7628, -73.8307],
