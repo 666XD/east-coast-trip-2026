@@ -132,8 +132,14 @@ export const cities: Record<string, CityData> = {
             coord: "Fenway Park",
           },
           {
+            name: "Prudential Center 普徠德中心",
+            desc: "波士頓地標摩天大樓 & Shops at Prudential Center 購物中心，鄰近 Newbury Street，Back Bay 核心",
+            time: "1-2hr",
+            coord: "Prudential Center",
+          },
+          {
             name: "View Boston",
-            desc: "Prudential 52樓觀景台",
+            desc: "Prudential 52樓觀景台，360° 俯瞰波士頓全景",
             time: "1hr",
             coord: "View Boston",
           },

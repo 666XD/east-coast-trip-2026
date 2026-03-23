@@ -26,6 +26,7 @@ export const coords: LocationCoords = {
   "Row 34": [42.3489, -71.0419],
   "Mamma Maria": [42.3645, -71.0533],
   "Saltie Girl": [42.3498, -71.0810],
+  "Prudential Center": [42.3470, -71.0825],
   "View Boston": [42.3473, -71.0819],
   "Seaport": [42.3489, -71.0419],
   "Daily Catch": [42.3647, -71.0535],
