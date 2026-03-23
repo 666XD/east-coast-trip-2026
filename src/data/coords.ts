@@ -62,6 +62,7 @@ export const coords: LocationCoords = {
   "Arlo NoMad": [40.7455, -73.9862],
   "M Social Hotel New York Times Square": [40.757, -73.9878],
   "Wall Street": [40.7068, -74.0089],
+  "Trinity Church": [40.7081, -74.0120],
   "The Oculus": [40.7113, -74.0133],
   "Flatiron Building": [40.7411, -73.9897],
   "SoHo": [40.7233, -73.9985],
