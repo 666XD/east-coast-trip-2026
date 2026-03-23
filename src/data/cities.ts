@@ -1049,8 +1049,7 @@ export const itinerary: ItineraryDay[] = [
         icon: "🏛️",
         coord: "Vietnam Memorial",
       },
-      { time: "16:00", act: "Washington Monument", icon: "🗼", coord: "Washington Monument" },
-      { time: "16:30", act: "White House 外觀拍照", icon: "🏛️", coord: "White House" },
+      { time: "16:00", act: "White House 外觀拍照", icon: "🏛️", coord: "White House" },
       {
         time: "17:30-19:00",
         act: "晚餐：Zaytinya 或 Moon Rabbit",
@@ -1079,15 +1078,18 @@ export const itinerary: ItineraryDay[] = [
       { item: "DC Metro", cost: "$6" },
     ],
     schedule: [
-      { time: "08:30-08:50", act: "Apple Carnegie Library 蘋果商店 🍎 (hotel 旁，圖書館改建)", icon: "🍎", coord: "Apple Carnegie Library" },
+      { time: "06:30", act: "出門走到 Washington Monument Lodge 排隊 (步行~20min)", icon: "🚶" },
+      { time: "06:50-08:45", act: "排隊等候領取 Washington Monument 免費 timed-entry 票", icon: "⏳", coord: "Washington Monument" },
+      { time: "08:50-09:10", act: "Apple Carnegie Library 蘋果商店 🍎 (Monument Lodge 旁)", icon: "🍎", coord: "Apple Carnegie Library" },
+      { time: "09:30-10:00", act: "🗼 Washington Monument 登頂！(依領取的時段入場)", icon: "🗼", coord: "Washington Monument" },
       {
-        time: "09:00-11:30",
+        time: "10:15-12:00",
         act: "🚀 Air & Space Museum (需預約)",
         icon: "🚀",
         coord: "Air & Space Museum",
       },
       {
-        time: "11:30-13:30",
+        time: "12:00-13:30",
         act: "💎 Natural History Museum (恐龍+Hope Diamond)",
         icon: "💎",
         coord: "Natural History Museum",
