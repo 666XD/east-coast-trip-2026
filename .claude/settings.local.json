@@ -7,7 +7,9 @@
       "mcp__claude_ai_Notion__notion-search",
       "mcp__claude_ai_Notion__notion-fetch",
       "Bash(npx next:*)",
-      "mcp__claude_ai_Notion__notion-update-page"
+      "mcp__claude_ai_Notion__notion-update-page",
+      "WebSearch",
+      "mcp__claude_ai_Google_Calendar__gcal_create_event"
     ]
   }
 }

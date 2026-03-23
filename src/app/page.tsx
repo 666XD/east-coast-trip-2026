@@ -4,6 +4,7 @@ import { useState } from 'react';
 import DynamicMap from '@/components/DynamicMap';
 import { cities, itinerary, colorMap } from '@/data/cities';
 import { coords } from '@/data/coords';
+import { subLocations } from '@/data/subLocations';
 
 interface MarkerData {
   lat: number;
@@ -136,6 +137,11 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('overview');
   const [selectedCity, setSelectedCity] = useState<'boston' | 'nyc' | 'flushing' | 'dc'>('boston');
   const [selectedCategory, setSelectedCategory] = useState('全部');
+  const [expandedSubMaps, setExpandedSubMaps] = useState<Record<string, boolean>>({});
+
+  const toggleSubMap = (key: string) => {
+    setExpandedSubMaps((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   // Build schedule info mapping: coord/name → "date time"
   const getScheduleInfo = (coord?: string, name?: string): string | null => {
@@ -647,6 +653,59 @@ export default function Home() {
                                 📍 Google Maps
                               </button>
                             )}
+                            {item.coord && subLocations[item.coord] && (() => {
+                              const route = subLocations[item.coord!];
+                              const mapKey = `${dayIdx}-${itemIdx}`;
+                              const isExpanded = expandedSubMaps[mapKey];
+                              const subMarkers = route.stops
+                                .filter((s) => coords[s.coord])
+                                .map((s, idx) => ({
+                                  lat: coords[s.coord][0],
+                                  lng: coords[s.coord][1],
+                                  name: s.name,
+                                  desc: s.desc,
+                                  number: idx + 1,
+                                  color: route.color,
+                                }));
+                              return (
+                                <div className="mt-3">
+                                  <button
+                                    onClick={() => toggleSubMap(mapKey)}
+                                    className="text-sm font-medium px-3 py-1.5 rounded-lg transition-colors"
+                                    style={{
+                                      backgroundColor: isExpanded ? route.color : '#f3f4f6',
+                                      color: isExpanded ? 'white' : '#374151',
+                                    }}
+                                  >
+                                    {isExpanded ? '收起' : '展開'} 🗺️ {route.label}
+                                  </button>
+                                  {isExpanded && (
+                                    <div className="mt-2 rounded-lg overflow-hidden shadow-sm border border-gray-200">
+                                      <DynamicMap
+                                        markers={subMarkers}
+                                        center={{ lat: subMarkers[0].lat, lng: subMarkers[0].lng }}
+                                        zoom={16}
+                                        height={250}
+                                      />
+                                      <div className="bg-white px-3 py-2 space-y-1.5">
+                                        {route.stops.map((s, sIdx) => (
+                                          <div key={sIdx} className="flex items-center gap-2 text-sm">
+                                            <span
+                                              className="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"
+                                              style={{ backgroundColor: route.color }}
+                                            >
+                                              {sIdx + 1}
+                                            </span>
+                                            <span className="font-medium">{s.name}</span>
+                                            {s.desc && <span className="text-gray-500">— {s.desc}</span>}
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })()}
                           </div>
                         </div>
                           );
