@@ -858,7 +858,7 @@ export const itinerary: ItineraryDay[] = [
   {
     date: "4/1 (三)",
     city: "nyc",
-    title: "自由女神 → Brooklyn Bridge → Broadway",
+    title: "自由女神 → Brooklyn Bridge → MoMA → Times Square 美食之夜",
     hotel: "M Social Hotel New York Times Square",
     hotelCoord: "M Social Hotel New York Times Square",
     budget: [
@@ -867,7 +867,8 @@ export const itinerary: ItineraryDay[] = [
       { item: "自由女神渡輪", cost: "$25" },
       { item: "Top of the Rock 門票", cost: "$40" },
       { item: "MoMA 門票", cost: "$30" },
-      { item: "Broadway 門票", cost: "$100" },
+      { item: "Junior's 起司蛋糕", cost: "$8" },
+      { item: "Joe's Pizza", cost: "$5" },
       { item: "午餐", cost: "$15" },
       { item: "NYC 地鐵", cost: "$6" },
     ],
@@ -905,8 +906,12 @@ export const itinerary: ItineraryDay[] = [
       { time: "16:15-16:30", act: "St. Patrick's Cathedral 聖派翠克教堂", icon: "⛪", coord: "St. Patrick's Cathedral" },
       { time: "16:30-17:20", act: "MoMA 現代藝術博物館 (快速50min精華：星夜+睡蓮)", icon: "🖼️", coord: "MoMA" },
       { time: "17:20-17:40", act: "Apple Store 第五大道旗艦店 🍎", icon: "🍎", coord: "Apple Store Fifth Ave" },
-      { time: "18:00-20:30", act: "🎭 Broadway 看秀", icon: "🎭", coord: "Broadway" },
-      { time: "21:00", act: "check in M Social Hotel", icon: "🏨", coord: "M Social Hotel" },
+      { time: "18:00-18:20", act: "Times Square + Broadway 拍照打卡 📸", icon: "📸", coord: "Times Square" },
+      { time: "18:20-18:45", act: "Grand Central Terminal 星空穹頂 + 四面鐘", icon: "🕰️", coord: "Grand Central" },
+      { time: "18:45-19:15", act: "Junior's Bakery 紐約起司蛋糕 🍰 (Times Square 店)", icon: "🍰", coord: "Junior's Bakery" },
+      { time: "19:30-20:00", act: "Joe's Pizza 經典大薄片 🍕 (Greenwich Village)", icon: "🍕", coord: "Joe's Pizza" },
+      { time: "20:00-20:30", act: "Washington Square Park 夜景散步", icon: "🌙", coord: "Washington Square Park" },
+      { time: "21:00", act: "check in M Social Hotel", icon: "🏨", coord: "M Social Hotel New York Times Square" },
     ],
   },
   {
